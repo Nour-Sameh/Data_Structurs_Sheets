@@ -135,6 +135,24 @@ int max(stack<int>& st) {
 
 	return mx;
 }
+int evaluatePostfix(string s){
+    stack<int>st;
+    for(int i=0;i<s.size();i++){
+        if(isdigit(s[i])){
+            st.push(s[i]-'0');// important
+        }
+        else{
+            int val1=st.pop();
+            int val2=st.pop();
+            if(s[i]=='+')st.push(val1+val2);
+            else if(s[i]=='-')st.push(val1-val2);
+            else if(s[i]=='*')st.push(val1*val2);
+            else if(s[i]=='/')st.push(val1/val2);
+        }
+    }
+    return st.TOP();
+
+}
 int main(){
     stack<int> s;
     s.push(10);
